@@ -93,7 +93,7 @@ Los resultados confirman la **correlación perfecta del entrelazamiento**: los e
 
 ### Captura de Checkpoint 1
 
-![Checkpoint 1 — Bell State](capturas/Checkpoint1.png)
+![Checkpoint 1 — Bell State](captures/Checkpoint1.png)
 
 ---
 
@@ -142,7 +142,7 @@ Los resultados son **deterministas** (probabilidad 100%), lo que demuestra la ve
 
 ### Captura de Checkpoint 2
 
-![Checkpoint 2 — Deutsch-Jozsa](capturas/Checkpoint2.png)
+![Checkpoint 2 — Deutsch-Jozsa](captures/Checkpoint2.png)
 
 ---
 
@@ -202,7 +202,7 @@ Los 4 estados objetivo fueron encontrados con probabilidad 100%, confirmando que
 
 ### Captura de Checkpoint 3
 
-![Checkpoint 3 — Grover](capturas/Checkpoint3.png)
+![Checkpoint 3 — Grover](captures/Checkpoint3.png)
 
 ---
 
@@ -210,12 +210,23 @@ Los 4 estados objetivo fueron encontrados con probabilidad 100%, confirmando que
 
 | Experimento | Estado esperado | Verificación | Observación |
 |:---:|:---:|:---:|:---|
-| Bell \|Φ⁺⟩ | Solo \|00⟩ y \|11⟩, ~50/50 |  | Correlación perfecta, entrelazamiento confirmado |
-| Deutsch-Jozsa Constante | \|00⟩ con 100% | | Determinista, 1 evaluación |
-| Deutsch-Jozsa Balanceado | ≠ \|00⟩ con 100% |  | Determinista, 1 evaluación |
+| Bell \|Φ⁺⟩ | Solo \|00⟩ y \|11⟩, ~50/50 | ✅ | Correlación perfecta, entrelazamiento confirmado |
+| Deutsch-Jozsa Constante | \|00⟩ con 100% | ✅ | Determinista, 1 evaluación |
+| Deutsch-Jozsa Balanceado | ≠ \|00⟩ con 100% | ✅ | Determinista, 1 evaluación |
 | Grover \|00⟩ | \|00⟩ con >90% | 100% | Amplitud perfecta con 1 iteración |
 | Grover \|01⟩ | \|01⟩ con >90% | 100% | Amplitud perfecta con 1 iteración |
 | Grover \|10⟩ | \|10⟩ con >90% | 100% | Amplitud perfecta con 1 iteración |
 | Grover \|11⟩ | \|11⟩ con >90% | 100% | Amplitud perfecta con 1 iteración |
 
 ---
+**Conclusiones**
+1. El entrelazamiento cuántico es verificable experimentalmente.
+El estado de Bell |Φ⁺⟩ demostró que dos qubits pueden estar correlacionados de forma no clásica: los 1024 disparos produjeron exclusivamente |00⟩ y |11⟩, con distribución 50.2% / 49.8%, sin ninguna aparición de |01⟩ ni |10⟩. Esto confirma que la medición de un qubit determina instantáneamente el estado del otro, un comportamiento imposible de replicar con bits clásicos independientes.
+2. La ventaja cuántica de Deutsch-Jozsa es real y determinista.
+El algoritmo clásico necesita hasta 3 evaluaciones para n=2 en el peor caso; el circuito cuántico lo resuelve con exactamente 1. Los resultados fueron deterministas al 100%: el oráculo constante produjo siempre |00⟩ y el balanceado nunca lo produjo. Esto ilustra cómo la superposición y la interferencia cuántica permiten evaluar todas las entradas simultáneamente en una sola consulta al oráculo.
+3. El algoritmo de Grover amplifica con precisión el estado objetivo.
+Para n=2 qubits, 1 iteración del operador de Grover es exactamente suficiente para llevar la amplitud del estado marcado de 1/2 a 1 (probabilidad 100%). Los 4 estados objetivo fueron encontrados correctamente, validando tanto el diseño del oráculo de fase como el difusor. En problemas de mayor escala, la aceleración cuadrática O(√N) frente a O(N) representa una ventaja práctica significativa.
+4. Los simuladores clásicos son una herramienta válida para aprender computación cuántica.
+El uso de AerSimulator permitió reproducir fielmente el comportamiento cuántico teórico sin necesidad de hardware real. Sin embargo, su costo computacional escala exponencialmente con el número de qubits, lo que hace que la simulación clásica sea inviable para circuitos grandes — precisamente el escenario donde el hardware cuántico real ofrecería ventaja.
+5. Qiskit 1.x provee una abstracción limpia y expresiva.
+La API de QuantumCircuit permitió construir, componer y medir circuitos cuánticos con pocas líneas de código, facilitando la verificación automática de los resultados mediante assert. Esto subraya la importancia de los frameworks de computación cuántica de alto nivel para hacer accesible esta tecnología a los ingenieros de sistemas.
